@@ -1,0 +1,242 @@
+fn number() -> i32 {
+    return 8; // feel free to remove return and ;
+}
+
+fn multiply(a: i32, b: i32) -> i32 {
+    let result = a * b;
+    println!("{} * {} = {}", a, b, result);
+    result
+}
+
+fn main() {
+    // this is a comment!
+    /*println!("Hello, world!1");
+    println!("Hello, world!2");*/
+    print!("Hello, World!");
+    println!("Hello, world!");
+
+    let number1 = 100; // Rust compiler chooses i32 by default
+    println!("{}", number1 as u8 as char);
+
+    let number2: u8 = 100;
+    println!("{}", number2 as char);
+
+    // Rust strings use the least amount of bytes possible to represent its chars
+    println!("Size of char = {}", std::mem::size_of::<char>());
+    println!("Size of \"a\" = {}", "a".len());
+    println!("Size of \"ß\" = {}", "ß".len());
+    println!("Size of \"国\" = {}", "国".len());
+    println!("Size of \"𓅱\" = {}", "𓅱".len());
+    println!("Size of \"안녕\" = {}", "안녕".len());
+
+    let slice1 = "Hello";
+    println!(
+        "{} is {} chars and {} bytes long",
+        slice1,
+        slice1.chars().count(),
+        slice1.len()
+    );
+
+    let slice = "안녕";
+    println!(
+        "{} is {} chars and {} bytes long",
+        slice,
+        slice.chars().count(),
+        slice.len()
+    );
+
+    // Rust compiler can guess a type, but you need to tell it for 2 reasons:
+    // 1. You're doing smth complex, and the compiler does not know what to do
+    // 2. You want a different type
+    let age: u8 = 72;
+    // or
+    let age2: u8 = 72_u8;
+    println!("age = {}, age2 = {}", age, age2);
+
+    // It doesn't matter how many _s you use:
+    let beauty = 1_000_000______0111_i64;
+    println!("{}", beauty);
+
+    // Rust chooses f64 by default
+    let float_number = 5.5;
+    println!("{}", float_number);
+
+    // two different types do not work together, you should cast one of them:
+    let f32_number: f32 = 5.5;
+    let fsum = float_number + f32_number;
+    println!("{}", fsum);
+
+    // function calls are the same
+    println!("{}", number());
+
+    let result = multiply(16, 16);
+    println!("{}", result);
+
+    // you can use a code block similar to a lambda function:
+    let awesome_number = {
+        let second_number = 8;
+        second_number + 7
+    };
+    println!("{}", awesome_number);
+
+    // DISPLAY "{}" and DEBUG{:?} prints
+    // use DEBUG print when you don't know the type
+    let really_nothing = ();
+    println!("{:?}", really_nothing);
+
+    // Smallest and largest numbers
+    println!(
+        "The smallest i8 is {} and the biggest i8 is {}",
+        i8::MIN,
+        i8::MAX
+    );
+    println!(
+        "The smallest u8 is {} and the biggest u8 is {}",
+        u8::MIN,
+        u8::MAX
+    );
+    println!(
+        "The smallest i16 is {} and the biggest i16 is {}",
+        i16::MIN,
+        i16::MAX
+    );
+    println!(
+        "The smallest u16 is {} and the biggest u16 is {}",
+        u16::MIN,
+        u16::MAX
+    );
+    println!(
+        "The smallest i32 is {} and the biggest i32 is {}",
+        i32::MIN,
+        i32::MAX
+    );
+    println!(
+        "The smallest u32 is {} and the biggest u32 is {}",
+        u32::MIN,
+        u32::MAX
+    );
+    println!(
+        "The smallest i64 is {} and the biggest i64 is {}",
+        i64::MIN,
+        i64::MAX
+    );
+    println!(
+        "The smallest u64 is {} and the biggest u64 is {}",
+        u64::MIN,
+        u64::MAX
+    );
+    println!(
+        "The smallest i128 is {} and the biggest i128 is {}",
+        i128::MIN,
+        i128::MAX
+    );
+    println!(
+        "The smallest u128 is {} and the biggest u128 is {}",
+        u128::MIN,
+        u128::MAX
+    );
+    println!("{}", std::mem::size_of::<usize>());
+    println!("{}", std::mem::size_of::<usize>());
+
+    // when you declare a variable with let, it is immutable:
+    let mut immutable_number = 32;
+    immutable_number = 34;
+    println!("immutable_number = {}", immutable_number);
+
+    // shadowing existing variable names
+    let my_number = 32;
+    let my_number: f64 = 32.8;
+    println!("the shadowed integer becomes a float: {}", my_number);
+
+    // pointers are like in C++ pointers: reference -> value
+    let my_variable = 8;
+    let my_reference = &my_variable; // Read it: my_reference is a reference to my_variable
+    println!("Reference: {}", my_reference); // references BORROW the value, but don't own it!
+
+    // More printing
+    println!(
+        "You can write
+over many lines"
+    );
+
+    // print bytes
+    println!("{:?}", b"This will print the bytes");
+    // put r# and b together:
+    println!("{:?}", br##"This is a hashtag #"##);
+
+    // Unicode escape:
+    println!("{:X}", '행' as u32);
+    println!("\u{D589}");
+
+    // pointer address:
+    let my_number = 8;
+    let my_reference = &my_reference;
+    println!("{:p}", my_reference);
+
+    // or binary, hex and octal:
+    let my_number = 8;
+    println!(
+        "Binary: {:b}, Hex: {:x}, Octal: {:o}",
+        my_number, my_number, my_number
+    );
+
+    // change the order of printing
+    println!("{2}, {1}, {0}", "a", "b", "c");
+
+    // or add name for each printables:
+    println!(
+        "{age}, {name}, {phone}",
+        name = "Aziz",
+        age = 26,
+        phone = 12312312
+    );
+
+    // Two types of strings: &str and String
+    // &str is very fast, String is slower with more functions
+    // You don't own &str, it is a reference
+    let name = "서태지";
+    let other_name = String::from("Adrian Fahrenheit Țepeș");
+    println!("{:p}", name);
+    println!("{}", other_name);
+
+    // emojis are okay
+    let name = "😂";
+    println!("My name is {}", name);
+    println!(
+        "String is always {:?} bytes. It is sized!",
+        std::mem::size_of::<String>()
+    );
+    println!(
+        "Some other sized types: i8({}), u64({}), f64({}) etc.",
+        std::mem::size_of::<i8>(),
+        std::mem::size_of::<u64>(),
+        std::mem::size_of::<f64>()
+    );
+    println!(
+        "But str is not sized: 'aziz'({:?}), '서태지'({:?})",
+        std::mem::size_of_val("aziz"),
+        std::mem::size_of_val("서태지")
+    );
+
+    // many ways to make a string:
+    let my_name = "Aziz";
+    let my_country = "Uzbek";
+    let my_home = "Korea";
+
+    let together = format!(
+        "I am {} and I come from {} but I live in {}",
+        my_name, my_country, my_home
+    );
+    println!("{}", together);
+    let my_string = String::from("Hey Aziz");
+    println!("{}", my_string);
+
+    let try_to_make_it_a_string: String = "Try to make a String".into();
+    println!("{}", try_to_make_it_a_string);
+
+    // const does not change
+    // static has a fixed memory location, can act as global var
+    const NUMBER_OF_MONTHS: u32 = 12;
+    static API_KEY: &str = "asdas";
+    println!("{}", NUMBER_OF_MONTHS);
+}
