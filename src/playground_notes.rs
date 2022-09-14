@@ -296,4 +296,18 @@ over many lines"
     // These types are all on the stack, so the compiler just copies them (the sizes are known -> easy to copy)
     // String is a clone type: e.g. it can be cloned to pass it to a function
     // but in most cases, just pass its reference (clone operation is heavy!)
+    
+    // Arrays: declared as [type; size]
+    // 1. Array size can't be changed
+    // 2. Array elements are always the same type
+    let weekdays = ["Mon","Tue","Wed","Thu","Fri"];
+    println!("{:?}", weekdays);
+
+    let dogs = ["Dog"; 5]; // 5 "Dog"s
+    println!("{:?}", dogs);
+    println!("{}", dogs[1]);
+
+    // Slicing the array (exclusive: 0..2 includes 0th and 1st elements).
+    let digits = [0,1,2,3,4,5,6,7,8,9];
+    println!("{:?}", &digits[1..4]);
 }
