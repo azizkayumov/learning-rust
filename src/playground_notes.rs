@@ -239,4 +239,61 @@ over many lines"
     const NUMBER_OF_MONTHS: u32 = 12;
     static API_KEY: &str = "asdas";
     println!("{}", NUMBER_OF_MONTHS);
+    
+    // More on references
+    // Rust uses references to make sure that all memory access is safe
+    let country = String::from("Uzbekistan");
+    let ref1 = &country;
+    let ref2 = &country;
+    println!("{}, {}", ref1, ref2);
+    // but this is not okay:
+    /*
+    let another_ref = {
+        let city = String::from("Tashkent"); /// <-- This guy does not LIVE ENOUGH!!
+        let ref3 = &city;
+        ref3
+    };
+    println!("{}", another_ref);
+    */
+
+    // Mutable references (just like in C++): use * to change the value
+    // & is called "reference"
+    // * is called "dereference"
+    let mut my_number = 8;
+    let num_ref = &mut my_number;
+    *num_ref += 95;
+    println!("{}", my_number);
+    // but this is not okay:
+    /*
+    let triple_ref = &&&mut my_number;
+    ***triple_ref -= 95;
+    println!("{}", my_number);
+    */
+    // A mutable reference can have only ONE level of reference: &mut my_number (only one editor)
+    // An immutable reference can have many: &&&my_number (many listeners)
+    let my_number = 8;
+    let triple_ref = &&&my_number;
+    println!("{}", ***triple_ref);
+    // Shadowing doesn't destroy a value, it BLOCKS it.
+    let country = String::from("Germany");
+    let country_ref = &country;
+    let country = 8;
+    println!("{}, {}", country_ref, country);
+
+
+    // Give references to functions
+    let country = String::from("Korea");
+    print_country(country); // country value moved here, meaning that it is now dead for this context!
+    // print_country(country); // <-- This doesn't work: value used here after move
+    // So give references instead:
+    let country = String::from("Japan");
+    print_country_by_ref(&country);
+    print_country_by_ref(&country); // This means: You can look at it, but I keep it!
+
+    let mut country = String::from("Canada");
+    add_another_country(&mut country);
+    // Copy types: integers, floats, booleans and char
+    // These types are all on the stack, so the compiler just copies them (the sizes are known -> easy to copy)
+    // String is a clone type: e.g. it can be cloned to pass it to a function
+    // but in most cases, just pass its reference (clone operation is heavy!)
 }
