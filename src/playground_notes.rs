@@ -307,7 +307,10 @@ over many lines"
     println!("{:?}", dogs);
     println!("{}", dogs[1]);
 
-    // Slicing the array (exclusive: 0..2 includes 0th and 1st elements).
+    // Slicing the array (exclusive: the range '0..2' includes 0th and 1st elements).
     let digits = [0,1,2,3,4,5,6,7,8,9];
-    println!("{:?}", &digits[1..4]);
+    println!("{:?}", &digits[1..4]); // from 1 until 4 (exclusive)
+    println!("{:?}", &digits[..4]); // from start until 4
+    println!("{:?}", &digits[4..]); // 4 until the end
+    println!("{:?}", &digits[..]); // everything
 }
