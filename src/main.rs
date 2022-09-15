@@ -1,3 +1,5 @@
+mod concatenation_arrays;
+
 fn main() {
     println!("Hello, world!");
     // Rust strings use the least amount of bytes possible to represent its chars
