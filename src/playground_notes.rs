@@ -8,6 +8,20 @@ fn multiply(a: i32, b: i32) -> i32 {
     result
 }
 
+fn print_country(country_name: String) {
+    println!("{}", country_name);
+}
+
+fn print_country_by_ref(country_name: &String) {
+    println!("{}", country_name);
+}
+
+fn add_another_country(country_name: &mut String) {
+    println!("It was {}", country_name);
+    country_name.push_str("+USA");
+    println!("Now it is {}", country_name);
+}
+
 fn main() {
     // this is a comment!
     /*println!("Hello, world!1");
@@ -239,7 +253,7 @@ over many lines"
     const NUMBER_OF_MONTHS: u32 = 12;
     static API_KEY: &str = "asdas";
     println!("{}", NUMBER_OF_MONTHS);
-    
+
     // More on references
     // Rust uses references to make sure that all memory access is safe
     let country = String::from("Uzbekistan");
@@ -280,12 +294,11 @@ over many lines"
     let country = 8;
     println!("{}, {}", country_ref, country);
 
-
     // Give references to functions
     let country = String::from("Korea");
     print_country(country); // country value moved here, meaning that it is now dead for this context!
-    // print_country(country); // <-- This doesn't work: value used here after move
-    // So give references instead:
+                            // print_country(country); // <-- This doesn't work: value used here after move
+                            // So give references instead:
     let country = String::from("Japan");
     print_country_by_ref(&country);
     print_country_by_ref(&country); // This means: You can look at it, but I keep it!
@@ -296,21 +309,55 @@ over many lines"
     // These types are all on the stack, so the compiler just copies them (the sizes are known -> easy to copy)
     // String is a clone type: e.g. it can be cloned to pass it to a function
     // but in most cases, just pass its reference (clone operation is heavy!)
-    
+
     // Arrays: declared as [type; size]
     // 1. Array size can't be changed
     // 2. Array elements are always the same type
-    let weekdays = ["Mon","Tue","Wed","Thu","Fri"];
+    let weekdays = ["Mon", "Tue", "Wed", "Thu", "Fri"];
     println!("{:?}", weekdays);
 
     let dogs = ["Dog"; 5]; // 5 "Dog"s
     println!("{:?}", dogs);
     println!("{}", dogs[1]);
 
-    // Slicing the array (exclusive: the range '0..2' includes 0th and 1st elements).
-    let digits = [0,1,2,3,4,5,6,7,8,9];
+    // Slicing the array (exclusive: e.g. the range '0..2' includes 0th and 1st elements).
+    let digits = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
     println!("{:?}", &digits[1..4]); // from 1 until 4 (exclusive)
     println!("{:?}", &digits[..4]); // from start until 4
     println!("{:?}", &digits[4..]); // 4 until the end
     println!("{:?}", &digits[..]); // everything
+
+    // Arrays are fast, but with less functionality
+    // Vectors are slow, but with more functionality
+    let mut employees = Vec::new();
+    employees.push("Aziz"); // now Rust compiler knows the type -> no problem
+    employees.push("Scott");
+    println!("{:?}", employees);
+    // Vector with a tuple
+    let mut players: Vec<(&str, u8)> = Vec::new();
+    players.push(("Ronaldo", 36));
+    println!("{:?}", players);
+    // Using vec!
+    let weekends = vec!["Sat", "Sun"];
+    println!("{:?}", weekends);
+    // Slicing vectors (like in arrays)
+    println!("{:?}", &players[..1]);
+    // Vector has a capacity, when the number of elements reach its capacity
+    // it doubles its capacity and reallocate everything (slow)
+    let mut players = Vec::new();
+    players.push("Ronaldo");
+    println!("Capacity = {}", players.capacity());
+    players.push("Messi");
+    players.push("Mbappe");
+    players.push("Neymar");
+    println!("Capacity = {}", players.capacity());
+    players.push("Rashford");
+    println!("Capacity = {}", players.capacity());
+    // but we can make it faster (by giving it a capacity):
+    let mut players = Vec::with_capacity(8);
+    players.push("Martinez");
+    println!("Capacity = {}", players.capacity());
+    // conversion of arrays to Vectors with into():
+    let ages: Vec<u8> = [16, 18, 20, 22].into();
+    println!("{:?}", ages);
 }
