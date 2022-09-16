@@ -1,3 +1,4 @@
+mod build_array_from_permutation;
 mod concatenation_arrays;
 
 fn main() {
