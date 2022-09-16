@@ -6,10 +6,10 @@ pub fn build_array(mut nums: Vec<i32>) -> Vec<i32> {
     let N = n as i32;
 
     for i in 0..n {
-        nums[i] = nums[i] + N * (nums[nums[i] as usize] % N);
+        nums[i] += N * (nums[nums[i] as usize] % N);
     }
     for i in 0..n {
-        nums[i] = nums[i] / N;
+        nums[i] /= N;
     }
 
     return nums;
