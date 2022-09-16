@@ -360,4 +360,45 @@ over many lines"
     // conversion of arrays to Vectors with into():
     let ages: Vec<u8> = [16, 18, 20, 22].into();
     println!("{:?}", ages);
+    // create 2d 10x10 vector:
+    let dp = vec![vec!(0; 10); 10];
+    println!("{:?}", dp);
+
+    // Tuples (similar to Python tuples)
+    let random_tuple = ("Ronaldo", 37, 12_000_000);
+    println!("{:?}", random_tuple);
+    let (a, b, c) = (1, 2, 3);
+    println!("{}, {}, {}", a, b, c);
+
+    // Control flow
+    // If statement: same with other languages with no brackets (&& ||)
+    let my_number = 5;
+    if my_number == 7 && my_number >= 7 {
+        println!("This will never print!");
+    } else if my_number == 6 || my_number == 8 {
+        println!("This will too never print!");
+    } else {
+        println!("This guy prints!");
+    }
+    // Combine if+elses with match keyword:
+    match my_number {
+        7 => println!("This will never print!"),
+        6 => println!("This too will never print!"),
+        _ => println!("This guy prints!"),
+    };
+    // match tuples
+    let country = "Korea";
+    let population = "55mln";
+    match (country, population) {
+        ("USA", "320mln") => println!("Silicon valley"),
+        ("Korea", "55mln") => println!("Gangnam"),
+        _ => println!("This guy"),
+    };
+    // match has to return the same type
+    let special_number = match my_number {
+        7 => my_number * 14 + 27,
+        _ => my_number,
+    };
+
+    println!("{}", special_number);
 }
