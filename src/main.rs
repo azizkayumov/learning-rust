@@ -1,5 +1,6 @@
 mod build_array_from_permutation;
 mod concatenation_arrays;
+mod shuffle_array;
 
 fn main() {
     println!("Hello, world!");
