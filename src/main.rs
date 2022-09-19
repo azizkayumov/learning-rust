@@ -1,5 +1,6 @@
 mod build_array_from_permutation;
 mod concatenation_arrays;
+mod richest_customer_wealth;
 mod running_sum_of_array;
 
 fn main() {
