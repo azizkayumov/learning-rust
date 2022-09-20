@@ -1,7 +1,5 @@
 // https://leetcode.com/problems/how-many-numbers-are-smaller-than-the-current-number/
 
-use core::num;
-
 pub fn smaller_numbers_than_current(mut nums: Vec<i32>) -> Vec<i32> {
     // The input contains numbers constrained by: 0 <= nums[i] <= 100
     // Therefore, construct a counter array of size 100
