@@ -1,7 +1,32 @@
 // https://leetcode.com/problems/how-many-numbers-are-smaller-than-the-current-number/
 
-pub fn smaller_numbers_than_current(nums: Vec<i32>) -> Vec<i32> {
-    [0].into()
+use core::num;
+
+pub fn smaller_numbers_than_current(mut nums: Vec<i32>) -> Vec<i32> {
+    // The input contains numbers constrained by: 0 <= nums[i] <= 100
+    // Therefore, construct a counter array of size 100
+    // Loop the input and increment each num[i]'s count
+    let mut counter = [0; 101]; // including 100 itself
+    for i in 0..nums.len() {
+        let n = nums[i] as usize;
+        counter[n] += 1;
+    }
+    // Build the result for each number from the sum of counters of smaller numbers
+    for i in 1..counter.len() {
+        counter[i] += counter[i - 1];
+    }
+
+    // reuse the nums vector to construct the result
+    for i in 0..nums.len() {
+        let n = nums[i] as usize;
+        if n == 0 {
+            nums[i] = 0;
+        } else {
+            nums[i] = counter[n - 1];
+        }
+    }
+
+    nums
 }
 
 #[test]
