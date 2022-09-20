@@ -1,7 +1,21 @@
 // https://leetcode.com/problems/number-of-good-pairs/
 
-pub fn num_identical_pairs(nums: Vec<i32>) -> i32 {
-    -1
+pub fn num_identical_pairs(mut nums: Vec<i32>) -> i32 {
+    nums.sort();
+
+    // after sorting, count consecutive identical numbers
+    // for each number: add the number of previously seen identical number to result:
+    let mut result = 0;
+    let mut cur_count_of_pairs = 0;
+    for i in 1..nums.len() {
+        if nums[i] == nums[i - 1] {
+            cur_count_of_pairs += 1
+        } else {
+            cur_count_of_pairs = 0
+        }
+        result += cur_count_of_pairs;
+    }
+    result
 }
 
 #[test]
