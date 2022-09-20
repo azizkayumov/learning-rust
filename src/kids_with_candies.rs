@@ -1,7 +1,18 @@
 // https://leetcode.com/problems/kids-with-the-greatest-number-of-candies/
 
 pub fn kids_with_candies(candies: Vec<i32>, extra_candies: i32) -> Vec<bool> {
-    return [false].into();
+    let mut result: Vec<bool> = Vec::new();
+
+    // Find the max number of candies a kid has
+    let hungry_kid = candies.iter().max().unwrap().clone();
+
+    // Now try to give extra_candies to each kid and
+    // see if the kid will have the greatest number
+    for kid in candies {
+        result.push(kid + extra_candies >= hungry_kid);
+    }
+
+    result
 }
 
 #[test]
