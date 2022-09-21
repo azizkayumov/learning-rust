@@ -5,8 +5,8 @@ pub fn smaller_numbers_than_current(mut nums: Vec<i32>) -> Vec<i32> {
     // Therefore, construct a counter array of size 100
     // Loop the input and increment each num[i]'s count
     let mut counter = [0; 101]; // including 100 itself
-    for i in 0..nums.len() {
-        let n = nums[i] as usize;
+    for n in &nums {
+        let n = *n as usize;
         counter[n] += 1;
     }
     // Build the result for each number from the sum of counters of smaller numbers
