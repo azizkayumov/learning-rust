@@ -5,6 +5,7 @@ mod minimum_sum_of_four_digits;
 mod number_of_good_pairs;
 mod richest_customer_wealth;
 mod running_sum_of_array;
+mod shuffle_the_array;
 mod smaller_numbers_than_current;
 mod substract_product_and_sum;
 
