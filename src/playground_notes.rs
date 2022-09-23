@@ -22,6 +22,22 @@ fn add_another_country(country_name: &mut String) {
     println!("Now it is {}", country_name);
 }
 
+struct Colour(u8, u8, u8);
+struct SizeAndColour {
+    size: u32,
+    colour: Colour, // And we put it in our new named struct
+}
+struct Pixel {
+    x: u16,
+    y: u16,
+    colour: Colour,
+}
+struct Profile {
+    username: String,
+    nickname: String,
+    age: u8,
+}
+
 fn main() {
     // this is a comment!
     /*println!("Hello, world!1");
