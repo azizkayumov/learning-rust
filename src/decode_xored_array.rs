@@ -1,7 +1,11 @@
 // https://leetcode.com/problems/decode-xored-array/
 
 pub fn decode(mut encoded: Vec<i32>, first: i32) -> Vec<i32> {
-    [].into()
+    encoded.insert(0, first);
+    for i in 1..encoded.len() {
+        encoded[i] = encoded[i - 1] ^ encoded[i];
+    }
+    encoded
 }
 
 #[test]
