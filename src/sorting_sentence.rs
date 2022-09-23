@@ -1,7 +1,5 @@
 // https://leetcode.com/problems/sorting-the-sentence/
 
-use std::ops::Add;
-
 pub fn sort_sentence(s: String) -> String {
     // Split the input by a space, store it in a vector
     let mut words: Vec<&str> = s.split(' ').collect();
@@ -13,7 +11,7 @@ pub fn sort_sentence(s: String) -> String {
     let mut res = String::from("");
     for i in 0..words.len() {
         let word = words[i];
-        res += &word[0..(word.chars().count() - 1)];
+        res += &word[0..(word.len() - 1)];
         if i != words.len() - 1 {
             res += " ";
         }
