@@ -1,7 +1,14 @@
 // https://leetcode.com/problems/shuffle-string/
 
 pub fn restore_string(s: String, indices: Vec<i32>) -> String {
-    String::from("")
+    let mut result = vec![' '; s.len()];
+    let chars: Vec<char> = s.chars().collect();
+
+    for i in 0..indices.len() {
+        result[indices[i] as usize] = chars[i];
+    }
+
+    result.iter().collect()
 }
 
 #[test]
