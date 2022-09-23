@@ -1,7 +1,27 @@
 // https://leetcode.com/problems/decode-the-message/
+use std::collections::HashMap;
 
 pub fn decode_message(key: String, message: String) -> String {
-    String::from("")
+    let mut table: HashMap<char,char> = HashMap::new();
+    let mut letter = 'a' as u8;
+
+    for c in key.chars() {
+        if c.is_alphabetic() && !table.contains_key(&c) {
+            table.insert(c, letter as char);
+            letter += 1;
+        }
+    }
+
+    let mut result = String::with_capacity(message.len());
+    for c in message.chars() {
+        if c.is_alphabetic() {
+            result.push(table[&c]);
+        }else{
+            result.push(c);
+        }
+    }
+
+    result
 }
 
 #[test]
