@@ -401,4 +401,60 @@ over many lines"
     };
 
     println!("{}", special_number);
+
+    // 3 types of structs
+    // 1. A unit struct (doesn't have anything)
+    struct FileDirectory;
+    // 2. A tuple struct
+    // struct Colour(u8,u8,u8)
+    let my_color = Colour(50, 0, 50);
+    // 3. A named struct
+    // struct Pixel {
+    //     colour: Colour,
+    //     x: u16,
+    //     y: u16
+    // }
+    let pixel = Pixel {
+        x: 100,
+        y: 100,
+        colour: my_color,
+    };
+    println!("{:?}", pixel.x);
+
+    let username = String::from("aziz");
+    let nickname = String::from("any_nick");
+    let profile = Profile {
+        username,
+        nickname,
+        age: 27,
+    };
+
+    // Numbers
+    let base: i32 = 10;
+    println!("Pow = {}", base.pow(2));
+    println!("Mod = {}", 10 % 3);
+
+    // Enums
+    // The difference between struct and enum:
+    // Use a struct when you want one thing AND another thing
+    // Use an enum when you want one thing OR another thing
+    enum WEEK {
+        MON,
+        TUE,
+        WED,
+        THU,
+        FRI,
+        SAT,
+        SUN,
+    };
+    let today = WEEK::FRI;
+    match today {
+        FRI => println!("Happy Day"),
+        _ => println!("So so day"),
+    }
+
+    // Debugging a specific variable
+    let a = 10;
+    dbg!(&a);
+    // exit(0) = a normal exit, exit(1) = because of a personal reason
 }
