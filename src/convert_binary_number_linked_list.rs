@@ -14,8 +14,14 @@ impl ListNode {
     }
 }
 
-pub fn get_decimal_value(head: Option<Box<ListNode>>) -> i32 {
-    -1
+pub fn get_decimal_value(mut head: Option<Box<ListNode>>) -> i32 {
+    let mut result = 0;
+    while let Some(node) = head {
+        result = result << 1; // shift left
+        result = result | node.val; // bitwise OR with the current value
+        head = node.next;
+    }
+    result
 }
 
 #[test]
