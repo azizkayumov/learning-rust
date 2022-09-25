@@ -6,7 +6,7 @@ pub fn most_words_found(sentences: Vec<String>) -> i32 {
     // the number of words = the number of spaces + 1
     sentences
         .iter()
-        .map(|sentence| sentence.matches(" ").count() + 1)
+        .map(|sentence| sentence.matches(' ').count() + 1)
         .max()
         .unwrap() as i32
 }
