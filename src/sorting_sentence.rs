@@ -8,7 +8,7 @@ pub fn sort_sentence(s: String) -> String {
     words.sort_by(|&a, &b| a.chars().last().unwrap().cmp(&b.chars().last().unwrap()));
 
     // construct the result not including the last digit char of each word
-    let mut res = String::from("");
+    let mut res = String::new();
     for i in 0..words.len() {
         let word = words[i];
         res += &word[0..(word.len() - 1)];
