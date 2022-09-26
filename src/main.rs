@@ -1,12 +1,17 @@
 mod build_array_from_permutation;
 mod concatenation_arrays;
 mod count_items_matching_rule;
+mod create_target_array;
 mod defang_ip_addr;
+mod final_value_after_operations;
 mod jewels_and_stones;
 mod kids_with_candies;
 mod max_number_of_words_in_sentences;
+mod min_moves_to_seat;
 mod minimum_sum_of_four_digits;
 mod number_of_good_pairs;
+mod number_of_matches;
+mod number_of_steps;
 mod richest_customer_wealth;
 mod running_sum_of_array;
 mod shuffle_the_array;
