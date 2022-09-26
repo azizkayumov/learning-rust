@@ -1,7 +1,10 @@
 // https://leetcode.com/problems/final-value-of-variable-after-performing-operations/
 
 pub fn final_value_after_operations(operations: Vec<String>) -> i32 {
-    -1
+    operations
+        .iter()
+        .map(|op| if op.contains("++") { 1 } else { -1 })
+        .sum()
 }
 
 #[test]
