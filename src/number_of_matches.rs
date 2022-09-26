@@ -1,7 +1,15 @@
 // https://leetcode.com/problems/count-of-matches-in-tournament/
 
-pub fn number_of_matches(n: i32) -> i32 {
-    -1
+pub fn number_of_matches(mut n: i32) -> i32 {
+    let mut result = 0;
+    let mut remainder = 0;
+    while n > 0 {
+        n += remainder;
+        remainder = n % 2;
+        n /= 2;
+        result += n;
+    }
+    result
 }
 
 #[test]
