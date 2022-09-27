@@ -3,12 +3,13 @@ use std::collections::HashMap;
 
 pub fn decode_message(key: String, message: String) -> String {
     let mut table: HashMap<char,char> = HashMap::new();
-    let mut letter = 'a' as u8;
+    let mut letters = 'a'..='z';
 
     for c in key.chars() {
-        if c.is_alphabetic() && !table.contains_key(&c) {
-            table.insert(c, letter as char);
-            letter += 1;
+        if c.is_alphabetic() {
+            table.entry(c).or_insert_with(|| {
+                letters.next().unwrap()
+            });
         }
     }
 

@@ -1,12 +1,14 @@
 // https://leetcode.com/problems/shuffle-string/
 
+use std::iter::zip;
+
 pub fn restore_string(s: String, indices: Vec<i32>) -> String {
     let mut result = vec![' '; s.len()];
-    let chars: Vec<char> = s.chars().collect();
+    let chars = s.chars();
 
-    for i in 0..indices.len() {
-        result[indices[i] as usize] = chars[i];
-    }
+    chars.zip(indices).for_each(|(  character, index)| {
+        result[index as usize] = character;
+    });
 
     result.iter().collect()
 }
