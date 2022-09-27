@@ -1,5 +1,7 @@
 // https://leetcode.com/problems/minimum-number-of-moves-to-seat-everyone/
 
+use std::iter::zip;
+
 pub fn min_moves_to_seat(mut seats: Vec<i32>, mut students: Vec<i32>) -> i32 {
     let mut result = 0;
 
@@ -8,9 +10,9 @@ pub fn min_moves_to_seat(mut seats: Vec<i32>, mut students: Vec<i32>) -> i32 {
     seats.sort();
     students.sort();
 
-    for i in 0..seats.len() {
-        result += (students[i] - seats[i]).abs();
-    }
+    students.iter().zip(seats).for_each(|(student, seat)| {
+        result += (student- seat).abs();
+    });
 
     result
 }
