@@ -90,3 +90,52 @@ fn sum_xy(x: i32, y: i32){
     x + y
 }
 ```
+
+### Control flow
+If statement:
+```
+let number = 3;
+if number < 5 {
+    println!("I'm feeling lucky!");
+} else if number < 8 {
+    println!("I'm feeling good!");
+} else {
+    println!("I'm feeling sick!");
+}
+let another = if number == 3 { 5 } else { 8 };
+```
+
+There are 3 loops: `loop`, `while` and `for`.
+```
+loop {
+    println!("Loop over and over");
+}
+```
+Returning values from loops:
+```
+let mut count = 0;
+let result = loop {
+    count += 1;
+    
+    if count == 10 {
+        break count * 2
+    }
+}
+```
+Label loops to terminate in inner scopes:
+```
+let mut count = 0;
+'count_up: loop {
+    println!("count = {count}");
+    
+    let mut remaining = 10;
+    
+    loop {
+        println!("remaining = {remaining}");
+        if remaining == 3 {
+            break 'count_up;
+        }
+        remaining -= 1;
+    }
+}
+```
