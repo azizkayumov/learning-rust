@@ -139,3 +139,22 @@ let mut count = 0;
     }
 }
 ```
+While loop:
+```
+let mut number = 4;
+while number != 0 {
+    number -= 1;
+}
+```
+For loops:
+```
+let a = [1,2,3,4];
+for x in a {
+    println!("{x}");
+}
+
+for i in (1..4).rev() {
+    println!("{i}");
+}
+println!("LIFTOFF!");
+```
