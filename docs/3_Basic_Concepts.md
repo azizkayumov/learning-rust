@@ -75,3 +75,18 @@ Initialize an array to contain the same value for each element:
 ```
 let a = [3; 5]; // [3,3,3,3,3]
 ```
+
+### Functions
+Rust uses *snake case* as the conventional style for function and variable names:
+```
+fn another_function() {
+    println!("Do smth!");
+}
+```
+A function with a parameter and a return type:
+```
+fn sum_xy(x: i32, y: i32){
+    println!("x = {x}, y = {y}");
+    x + y
+}
+```
