@@ -1,7 +1,7 @@
 The concept of ownership is the unique feature of Rust that guarentees memory safety without needing a garbage collector. 
 
 ### Stack vs Heap
-Pushing to stack is fast and efficient, so it is used for fixed-sized values that can be known at compile time. Heap is used for dynamically allocated values with unknown values at compile time (e.g. `String`). 
+Pushing to stack is fast and efficient, all data stored on the stack must have a fixed size that can be known at compile time. Heap is used for dynamically allocated values with unknown values at compile time (e.g. `String`). 
 
 ### Ownership
 The concept of ownership addresses:
