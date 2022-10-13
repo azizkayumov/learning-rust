@@ -7,7 +7,8 @@ Pushing to stack is fast and efficient, all data stored on the stack must have a
 The concept of ownership addresses:
 - keeping track of what code is using what data on the heap
 - minimizing duplicate data on the heap
-- cleaning up unused data on the heap so you don't run out of memory
+- cleaning up unused data on the heap so you don't run out of memory.      
+
 In other words, the main purpose of ownership is to manage heap data.
 
 ### Ownership rules
