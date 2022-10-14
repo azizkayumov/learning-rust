@@ -118,3 +118,86 @@ fn main() {
     println!("{s2}");
 }
 ```
+
+### References
+To avoid giving the ownership to functions, references are used to pass the "view" of values:
+```
+fn calculate_len(s: &String) -> usize { // s is a reference
+    s.len() 
+} // here s goes out of scope, it is dropped, but the value it points to is not dropped.
+
+fn main() {
+    let hello = String::from("Hello");
+    let length = calculate_len(&hello);
+    println!("{s}"); // This works, we didn't give the ownership of the value, instead passed a reference
+}
+```
+The action of create a reference is called **borrowing** in Rust. When you borrow something, you don't have the **ownership** of it, you have it give it back.
+
+### Mutable References
+There can only be one mutable reference to a value in Rust:
+```
+fn change(s: &mut String){
+    s.push_str("World!");
+}
+
+fn main() {
+    let mut hello = String::from("Hello, ");
+    let ref1 = &mut hello;
+    let ref2 = &mut hello;
+    println!("{ref1}, {ref2}"); // THIS DOESN'T WORK: there can only be one "editor" of a value at a time!
+}
+```
+This restriction prevents *data races* where there are multiple mutable references and at least one of them modifies the data and there is no synchronization between all mutations. Therefore, only one mutable reference can point to a value in Rust:
+```
+fn change(s: &mut String){
+    s.push_str("World!");
+}
+
+fn main() {
+    let mut hello = String::from("Hello, ");
+    let ref1 = &mut hello;
+    change(ref1);
+    println!("{ref1}"); // This works.
+}
+```
+
+Rust also prevents having immutable and mutable references at the same time:
+```
+fn main() {
+    let mut hello = String::from("Hello");
+    let ref1 = &hello;
+    let ref2 = &mut hello;
+    println!("{ref1}, {ref2}"); // THIS DOESN'T WORK: cannot borrow `hello` as mutable 
+                                // because it is also borrowed as immutable
+}
+```
+Users of the immutable references don't expect the value suddenly change!
+
+### Dangling
+Rust compiler prevents creating a *dangling* references: a reference which loosely hang on pointing to a value that's been lost ownership or freed up. 
+```
+fn dangling() -> &String { // dangle returns a reference to a String
+    let s = String::from("hello");  // s is a new String
+    &s // we return a reference to s
+} // Here, s goes out of scope, and is dropped. Its memory goes away.
+  // Danger!
+
+fn main() {
+    let reference_to_nothing = dangling(); // THIS DOESN'T WORK: this function's return type contains a borrowed value, 
+                                           // but there is no value for it to be borrowed from
+    println!("{reference_to_nothing}");
+}
+```
+The solution is to just return the `String`:
+```
+fn dont_dangle() -> String {
+    let s = String::from("Hello");
+    s
+}
+
+fn main() {
+    let s = dont_dangle();
+    println!("{s}");
+}
+```
