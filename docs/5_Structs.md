@@ -1,0 +1,60 @@
+A struct (*structure*) is a custom data type to package multiple related values with a meaningful name:
+```
+struct User {
+    active: bool,
+    username: String,
+    email: String,
+    sign_in_count: u64
+}
+
+fn main() {
+    let mut user1 = User {
+        email: String::from("someone@example.com"),
+        username: String::from("someone123"),
+        active: true,
+        sign_in_count: 1,
+    };
+    user1.email = String::from("another@example.com");
+}
+```
+Note that the entire `user1` structure should be `mut`, Rust does not allow us to mark only certain fields as `mut`. 
+
+Creating another instance with `user1` attributes that implement `Move` trait invalidates `user1` itself:
+```
+struct User {
+    active: bool,
+    username: String,
+    email: String,
+    sign_in_count: u64
+}
+
+fn main() {
+    let mut user1 = User {
+        email: String::from("someone@example.com"),
+        username: String::from("someone123"),
+        active: true,
+        sign_in_count: 1,
+    };
+    user1.email = String::from("another@example.com");
+    
+    let user2 = User {
+        username: user1.username,
+        email: user1.email,
+        active: false,
+        sign_in_count: 2,
+    };
+    println!("{}", user1.email); // THIS DOESN'T WORK: value borrowed here after move
+    // move occurs because `user1.email` has type `String`, 
+    // which does not implement the `Copy` trait
+}
+```
+Using tuple structs with named fields:
+```
+struct Color(i32, i32, i32);
+struct Point(i32, i32, i32);
+
+fn main() {
+    let p = Point(100, 100, 100);
+    println!("{}, {}, {}", p.0, p.1, p.2);
+}
+```
