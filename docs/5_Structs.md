@@ -1,3 +1,5 @@
+### Define and Instantiate Structs
+
 A struct (*structure*) is a custom data type to package multiple related values with a meaningful name:
 ```
 struct User {
