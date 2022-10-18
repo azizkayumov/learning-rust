@@ -201,3 +201,67 @@ fn main() {
     println!("{s}");
 }
 ```
+
+### The Slice Type
+A string slice is a reference to part of a `String`:
+```
+let s = String::from("hello world");
+let hello = &s[0..5]; // doesn't include 5th character
+let world = &s[6..11];
+```
+If the end of range is the last element of the string, drop the end range:
+```
+let world = &s[6..];
+```
+Find the first word in `String`:
+```
+fn find_first_word(s: &String) -> &str {
+    let bytes = s.as_bytes();
+    
+    for (i, &item) in bytes.iter().enumerate() {
+        if item == b' ' {
+            return &s[0..i];
+        }
+    }
+    
+    &s[..]
+}
+
+fn main() {
+    let mut s = String::from("hello world");
+    let word = find_first_word(&s);
+    println!("{word}");
+}
+```
+A string literal is already a slice type, so this function signature can work for both `&str` and `String`s:
+```
+fn find_first_word(s: &str) -> &str {
+    let bytes = s.as_bytes();
+    
+    for (i, &item) in bytes.iter().enumerate() {
+        if item == b' ' {
+            return &s[0..i];
+        }
+    }
+    
+    &s[..]
+}
+
+fn main() {
+    // addition
+    let mut s = String::from("hello world");
+    let word = find_first_word(&s);
+    println!("{word}");
+
+    let s = "hello world";
+    let word = find_first_word(s);
+    println!("{word}");
+}
+```
+
+### Array Slice
+The same slicing can be applied to arrays:
+```
+let a = [1,2,3,4,5];
+let slice = &a[1..3]; // [2,3]
+```
