@@ -159,3 +159,23 @@ fn main() {
     println!("Today's {}", is_happy_day(friday));
 }
 ```
+
+### `if let` control flow
+`if let` can be used to shorten `match`: 
+```
+enum Day { Mon, Tue, Wed, Thu, Fri, Sat, Sun }
+
+fn is_happy_day(day: Day) -> String {
+    match day {
+        Day::Fri | Day::Sat | Day::Sun => "a happy day".to_string(),
+        _ => "is a sad day".to_string()
+    }
+}
+
+fn main() {
+    let chuseok: Option<Day> = Some(Day::Mon);
+    if let chuseok = Some(Day::Mon) {
+        println!("Monday is a happy day too");
+    }
+}
+```
