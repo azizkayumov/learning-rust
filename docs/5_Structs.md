@@ -60,3 +60,38 @@ fn main() {
     println!("{}, {}, {}", p.0, p.1, p.2);
 }
 ```
+
+### Example project using `Struct` with `Display` trait
+`Debug` trait can be used to debug-print `struct`s (like `toString()` in Java):
+```
+#[derive(Debug)]
+struct Rectangle {
+    width: u32,
+    height: u32,
+}
+
+fn main() {
+    let rec1 = Rectangle {
+        width: 30,
+        height: 50,
+    };
+    println!("rect is {:?}", rec1);
+}
+```
+
+`dbg!` macro can also be used to display `struct`s with `Debug` trait (but takes the ownership):
+```
+#[derive(Debug)]
+struct Rectangle {
+    width: u32,
+    height: u32,
+}
+
+fn main() {
+    let rec1 = Rectangle {
+        width: 30,
+        height: 50,
+    };
+    let rec1= dbg!(rec1);
+}
+```
