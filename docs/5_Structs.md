@@ -61,7 +61,7 @@ fn main() {
 }
 ```
 
-### Example project using `Struct` with `Display` trait
+### Example project using `Struct` with `Debug` trait
 `Debug` trait can be used to debug-print `struct`s (like `toString()` in Java):
 ```
 #[derive(Debug)]
@@ -93,5 +93,69 @@ fn main() {
         height: 50,
     };
     let rec1= dbg!(rec1);
+}
+```
+
+### Methods
+
+`impl` (implementation) block is used to extend `struct`s with methods. Each method should have `&self` as the first parameter (similar to Python `self`:
+```
+#[derive(Debug)]
+struct Rectangle {
+    width: u32,
+    height: u32,
+}
+
+impl Rectangle {
+    fn area(&self) -> u32 {
+        self.width * self.height
+    }
+    
+    fn can_hold(&self, rect: &Rectangle) -> bool {
+        self.width >= rect.width && self.height >= rect.height
+    }
+}
+
+fn main() {
+    let rect1 = Rectangle {
+        width: 30,
+        height: 50
+    };
+    let rect2 = Rectangle {
+        width: 20,
+        height: 50
+    };
+    println!("Rect1 can hold rect2: {}", rect1.can_hold(&rect2));
+}
+```
+
+In Rust, associated functions can work without `self` as their first parameter, thus associated functions are not called *method*s (similar `companion object` in Kotlin). Associated functions are called using `Rectangle::square` syntax:
+```
+#[derive(Debug)]
+struct Rectangle {
+    width: u32,
+    height: u32,
+}
+
+impl Rectangle {
+    fn area(&self) -> u32 {
+        self.width * self.height
+    }
+    
+    fn can_hold(&self, rect: &Rectangle) -> bool {
+        self.width >= rect.width && self.height >= rect.height
+    }
+
+    fn square(side: u32) -> Self {
+        Self {
+            width: side,
+            height: side
+        }
+    }
+}
+
+fn main() {
+    let square = Rectangle::square(30);
+    println!("Square: {:?}", square);
 }
 ```
