@@ -97,3 +97,65 @@ fn main() {
     let res = x + y.unwrap_or(7);
 }
 ```
+
+### `match` and `Option<T>`
+`match` is perfectly used with `enum`s:
+```
+enum Coin {
+    Penny,
+    Nickel,
+    Dime,
+    Quarter,
+}
+
+fn value_in_cents(coin: Coin) -> u8 {
+    match coin {
+        Coin::Penny => 1,
+        Coin::Nickel => 5,
+        Coin::Dime => 10,
+        Coin::Quarter => 25,
+    }
+}
+```
+
+Handling `Option<T>` values with `match` is extremely easy:
+```
+fn plus_one(x: Option<i32>) -> Option<i32> {
+    match x {
+        None => None,
+        Some(i) => Some(i+1),
+    }
+}
+
+fn main() {
+    let x = Some(220);
+    let x = plus_one(x);
+    println!("{:?}", x);
+}
+```
+### `match`es are exhaustive
+
+Rust doesn't compile `match` control flows without all cases covered:
+```
+fn plus_one(x: Option<i32>) -> Option<i32> {
+    match x {
+        Some(i) => Some(i+1),
+    }
+} // THIS DOESN'T COMPILE: non-exhaustive patterns: `None` not covered
+```
+Rust compiler protects us from forgetting non-covered cases. Fortunately, the `_` placeholder can be used to cover all other cases:
+```
+enum Day { Mon, Tue, Wed, Thu, Fri, Sat, Sun }
+
+fn is_happy_day(day: Day) -> String {
+    match day {
+        Day::Fri | Day::Sat | Day::Sun => "a happy day".to_string(),
+        _ => "is a sad day".to_string()
+    }
+}
+
+fn main() {
+    let friday = Day::Fri;
+    println!("Today's {}", is_happy_day(friday));
+}
+```
