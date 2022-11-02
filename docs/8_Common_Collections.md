@@ -42,3 +42,34 @@ for i in &mut v {
 }
 ```
 Vectors store elements of the same type.
+
+### HashMaps
+Hashmaps keep track of key-value pairs:
+```
+use std::collections::HashMap;
+
+fn main() {
+    let mut map = HashMap::new();
+    map.insert(String::from("Tottenham"), 44);
+    map.insert(String::from("ManUtd"), 55);
+    println!("{:?}", map);
+
+    println!("{:?}", map.get(&String::from("ManUtd")).copied().unwrap_or(0));
+    println!("{:?}", map.get(&String::from("Chelsea")).copied().unwrap_or(0));
+
+    for (key, val) in &map {
+        println!("{}: {}", key, val);
+    }
+}
+```
+Adding a value of if the key doesn't exist in the map:
+```
+    map.entry(String::from("Chelsea")).or_insert(50);
+    println!("{:?}", map.get(&String::from("Chelsea")).copied().unwrap_or(0));
+```
+Updating a value based on the old value:
+```
+    let manutd = map.entry(String::from("ManUtd")).or_insert(0);
+    *manutd += 3;
+    println!("{:?}", map.get(&String::from("ManUtd")).copied().unwrap_or(0));
+```
